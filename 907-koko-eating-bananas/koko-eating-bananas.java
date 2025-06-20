@@ -13,10 +13,10 @@ class Solution {
         // Binary search on k (eating speed)
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            int hourly = calculateTotalHours(piles, mid);
+            int total = calculateTotalHours(piles, mid);
 
-            if (hourly <= h) {
-                end = mid - 1; // try smaller k
+            if (total <= h) {
+                end = mid - 1; // try smaller k for more potential ans
             } else {
                 start = mid + 1; // need more speed
             }
