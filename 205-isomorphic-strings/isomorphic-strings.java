@@ -3,29 +3,23 @@ import java.util.HashMap;
 class Solution {
     public boolean isIsomorphic(String s, String t) {
         if (s.length() != t.length()) return false;
+        HashMap<Character,Character> map = new HashMap<>();
+        HashMap<Character,Character> reverse = new HashMap<>();
+        for(int i = 0 ; i < s.length(); i ++){
+            char original = s.charAt(i);
+            char replacement = t.charAt(i);
 
-        HashMap<Character, Character> mapST = new HashMap<>();
-        HashMap<Character, Character> mapTS = new HashMap<>();
-
-        for (int i = 0; i < s.length(); i++) {
-            char c1 = s.charAt(i);
-            char c2 = t.charAt(i);
-
-            // Forward mapping: s -> t
-            if (mapST.containsKey(c1)) {
-                if (mapST.get(c1) != c2) return false;
-            } else {
-                mapST.put(c1, c2);
+            if(map.containsKey(original)){
+                if(map.get(original)!=replacement)
+                return false;
+            }else{
+                if(reverse.containsKey(replacement)){//2 values 1 key
+                    return false;
+                }
+                map.put(original,replacement);
+                reverse.put(replacement, original);
             }
+        }return true;
 
-            // Reverse mapping: t -> s
-            if (mapTS.containsKey(c2)) {
-                if (mapTS.get(c2) != c1) return false;
-            } else {
-                mapTS.put(c2, c1);
-            }
-        }
-
-        return true;
     }
 }
