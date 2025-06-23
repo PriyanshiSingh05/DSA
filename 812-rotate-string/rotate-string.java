@@ -1,19 +1,21 @@
 class Solution {
     public boolean rotateString(String s, String goal) {
-        int n = s.length();
-        StringBuilder sb = new StringBuilder(s);
+      int n = s.length();
+      //rotate pick up first element 
+      //store it dlete it paste it end
 
-        while(true){
-            if(sb.toString().equals(goal)) return true;
-            char ch = sb.charAt(0);
-            sb.deleteCharAt(0);
-            sb.append(ch);
-            n--;
+      if(s.length()!= goal.length()) return false;
 
-            if(n==0 && !sb.toString().equals(goal)){
-                break;
-            }
-        }return sb.toString().equals(goal);
+      StringBuilder sb = new StringBuilder(s);
+      while(n-->0){
+
+        if(sb.toString().equals(goal)) return true;
         
+        char first = sb.charAt(0);
+        sb.deleteCharAt(0);
+        sb.append(first);
+        
+      }return false;
+
     }
 }
