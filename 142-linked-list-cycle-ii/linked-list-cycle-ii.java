@@ -11,20 +11,25 @@
  */
 public class Solution {
     public ListNode detectCycle(ListNode head) {
-        ListNode temp = head;
-        HashMap<ListNode , Integer> map = new HashMap<>();
-        while(temp!=null){
-            if(!map.containsKey(temp)){
-               map.put(temp,map.getOrDefault(temp,0)+1);
-               
+        ListNode slow = head;
+        ListNode fast = head;
+       
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast=fast.next.next;
+
+            //detect a cycle that is they collide for first time
+            if(slow == fast){
+                //it means they collided now 
+                slow = head;
+                while(slow !=fast){
+                    fast = fast.next;
+                    slow= slow.next;
+                }return fast; //can return slow as well   
             }
-            else{
-                return temp;
-            }
-            temp=temp.next;
 
         }
 
-        return null;
+        return null ;
     }
 }
