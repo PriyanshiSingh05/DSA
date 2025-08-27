@@ -9,22 +9,58 @@
  * }
  */
 class Solution {
-    public ListNode sortList(ListNode head) {
+         public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode dummyNode = new ListNode(-1);
+        ListNode temp = dummyNode;
         
-        ListNode temp = head;
-        List<Integer> arr = new ArrayList<>();
-        //step 1:copy
-        while(temp!=null){
-            arr.add(temp.val);
-            temp = temp.next;
+        while(list1!=null && list2!=null){
+            if(list1.val <= list2.val){
+                temp.next = list1;
+                list1 = list1.next;
+            }else{
+                temp.next = list2;
+                list2= list2.next;
 
+            }
+            temp = temp.next;
         }
-        Collections.sort(arr);
-        temp = head;
-        for(int i =0; i<arr.size() ;i++){
-            temp.val = arr.get(i);
-            temp = temp.next;
+        //any remaining
+        if(list1!=null){
+            temp.next = list1;
+           
+        }else{
+            temp.next = list2;
+           
+        }
+        return dummyNode.next;
+        
+    }//mid calculate tortoise hare 
+     public ListNode mid (ListNode head)
+     {   if(head== null) return null;               
+         ListNode slow = head;
+         ListNode fast = head.next;
+         while(fast != null && fast.next != null)
+         {
+            slow= slow.next;
+            fast= fast.next.next;
 
-        }return head;
+         }
+         return slow;
+         
+     }
+     //mergesort
+    public ListNode sortList(ListNode head) {
+        if(head==null || head.next==null) return head;
+         ListNode middle = mid(head);
+         ListNode leftN = head;
+         ListNode rightN = middle.next;
+         middle.next = null;
+         leftN =sortList(head);
+         rightN =sortList(rightN);
+         return  mergeTwoLists(leftN , rightN);
+
+
+        
+        
     }
 }
