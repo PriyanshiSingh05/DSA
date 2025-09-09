@@ -14,7 +14,7 @@ class Solution {
                 continue;
                 }
                //if its a mismatch 
-               return false; 
+              else return false; 
             }
         }return st.isEmpty();
         
