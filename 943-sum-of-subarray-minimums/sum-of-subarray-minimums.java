@@ -31,15 +31,17 @@ class Solution {
         int n = arr.length;
         int[] nse = findNSE(arr);
         int[] psee = findPSEE(arr);
-        long sum = 0;
+        int sum = 0;
         int mod = (int)1e9 +7;
         for(int i = 0 ; i < n ; i ++){
 
-            long left = i - psee[i];
-            long right = nse[i] - i;
-            sum = ( sum + arr[i] * left * right) % mod;
+            int left = i - psee[i];
+            int right = nse[i] - i;
+            long freq = left * right*1L;
+            int val = (int)((freq * arr[i]) % mod);
+            sum = ( sum + val) % mod;
         }
-        return (int)sum;
+        return sum;
 
 
        
