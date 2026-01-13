@@ -14,9 +14,9 @@ class Solution {
                 }
                 l++;
             }
-            if(zeros <= k){
+            
             maxlen = Math.max(maxlen , r - l + 1);
-            }
+            
         
         }
         return maxlen;
