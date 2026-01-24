@@ -1,28 +1,30 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-      Map<Integer, Integer> prefixSumCount = new HashMap<>();
+        return atmost(nums , goal) - atmost(nums , goal - 1); 
+       
+    }
+    //less than equal to sum
+    private int atmost(int[] nums , int goal){
+        if(goal < 0) return 0 ;
+        int left = 0;
+        int sum = 0; 
+        int count = 0;
+        int right = 0;
+        while(right < nums.length){
+            sum += nums[right];
 
-        // Initialize count and sum
-        int count = 0, sum = 0;
-
-        // Add base case: prefix sum 0 appears once
-        prefixSumCount.put(0, 1);
-
-        // Iterate through array
-        for (int num : nums) {
-            // Add current number to sum
-            sum += num;
-
-            // If (sum - goal) exists, add its count to result
-            if (prefixSumCount.containsKey(sum - goal)) {
-                count += prefixSumCount.get(sum - goal);
+            while(sum > goal){
+                // dec the window size
+                sum -= nums[left];
+                left++;
             }
 
-            // Update prefix sum count
-            prefixSumCount.put(sum, prefixSumCount.getOrDefault(sum, 0) + 1);
+            count += (right - left + 1);
+            right++;
         }
-
-        // Return final count
         return count;
+
     }
+
+
 }
