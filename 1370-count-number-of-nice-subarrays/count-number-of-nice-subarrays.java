@@ -6,19 +6,21 @@ class Solution {
 
     }
     public int atmostK(int[] nums , int k ){
-        if(k < 0) return 0 ; 
+        
         int left = 0;
-        int sum = 0 ; 
         int count = 0 ;
 
         for(int right = 0 ; right < nums.length ; right++){
-            sum +=(nums[right] % 2);
+            if(nums[right] % 2 != 0){
+                k--;
+            }
+            // shrink window till k is valid 
+            while(k < 0){
+                if(nums[left] % 2 != 0){
+                    k++;
 
-            while(sum > k){
-                sum -= (nums[left] % 2);
-                left++;
-            
-            
+                }
+                left++;         
             }
             count += (right - left + 1);
         } 
