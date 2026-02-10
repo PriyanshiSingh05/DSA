@@ -1,29 +1,23 @@
 class Solution {
     public int maxScore(int[] cardPoints, int k) {
+
         int n = cardPoints.length;
+        int lsum = 0 , rsum = 0 , maxSum = 0 ;
 
-        // Calculate the sum of first k cards from the front
-        int total = 0;
-        for (int i = 0; i < k; i++) {
-            total += cardPoints[i];
+        for(int i = 0 ; i <= k-1 ; i++){
+           lsum += cardPoints[i];
+        
         }
-
-        // Store the maximum score
-        int maxPoints = total;
-
-        // Slide the window: remove from front and add from back
-        for (int i = 0; i < k; i++) {
-            // Subtract card from front
-            total -= cardPoints[k - 1 - i];
-
-            // Add card from back
-            total += cardPoints[n - 1 - i];
-
-            // Update the max score
-            maxPoints = Math.max(maxPoints, total);
+       maxSum = lsum;
+       int right = n-1;
+       for(int i = k-1 ; i >= 0 ; i--){
+          lsum -= cardPoints[i];
+        // at the samwe time u ll add from the back
+          rsum += cardPoints[right];
+          right-- ;
+         maxSum = Math.max(maxSum , lsum + rsum);
         }
-
-        // Return the best possible score
-        return maxPoints;
+       return maxSum;
+ 
     }
 }
